@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userDetailsSchema = new mongoose.Schema({
   firstName: {
@@ -32,6 +33,11 @@ const userDetailsSchema = new mongoose.Schema({
     unique: true,
     match: /^\+?[1-9]\d{1,14}$/,
   },
+  password: {
+    type: String,
+    required: true,
+    minlength: 8, // Enforce a minimum password length
+  },
   //   roles: [{ type: mongoose.Schema.Types.ObjectId, ref: "UserRoles" }],
   roles: {
     type: String,
@@ -55,8 +61,12 @@ const userDetailsSchema = new mongoose.Schema({
   },
 });
 
-// Middleware to update timestamps
-userDetailsSchema.pre("save", function (next) {
+// Hash password before saving
+userDetailsSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
   this.updatedAt = Date.now();
   next();
 });

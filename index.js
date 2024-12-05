@@ -6,7 +6,12 @@ var cors = require("cors");
 // Connect Database
 connectDB();
 
-// const { WhatsAppConnectRoute } = require("./web/router");
+const {
+  LoginRouter,
+  holdingsRouter,
+  positionRouter,
+  transactionRouter,
+} = require("./src/web/routes");
 
 app.use(cors());
 app.use(express.json());
@@ -16,7 +21,10 @@ app.get("/", (req, res) => {
   res.send("Hello World! vinit");
 });
 
-// app.use("/contact-us", WhatsAppConnectRoute);
+app.use("/user", LoginRouter);
+app.use("/share", holdingsRouter);
+app.use("/stock", positionRouter);
+app.use("/transaction", transactionRouter);
 
 const port = 8080;
 app.listen(port, () => {
