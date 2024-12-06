@@ -1,6 +1,7 @@
 const { login, register } = require("./login");
 const holdings = require("./holdings");
 const position = require("./position");
+const { addStock } = require("./masterApi");
 const {
   getAllTransaction,
   getTransactionById,
@@ -19,4 +20,6 @@ module.exports = {
   getTransactionById,
   postBuy,
   postSale,
+
+  addStock,
 };

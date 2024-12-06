@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const tableActivitySchema = new mongoose.Schema({
-  getById: { type: String, required: true },
+  Id: { type: String, required: true },
   s_Number: { type: Number },
   userId: { type: String, required: true },
   type: { type: String, required: true },
@@ -14,13 +14,17 @@ const tableActivitySchema = new mongoose.Schema({
     required: true,
   },
   company_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     required: true,
     ref: "companyMasterTable",
+  },
+  transactionType:{
+    type: Number
   },
   isRead: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+
 });
 
 // Middleware to update timestamps

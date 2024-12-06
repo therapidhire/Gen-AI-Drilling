@@ -1,35 +1,15 @@
 const mongoose = require("mongoose");
 
 const companyMasterSchema = new mongoose.Schema({
-  roleId: {
-    type: Number,
-    required: true,
-    unique: true,
-    index: true,
-  },
-  roleDescription: {
+  stock_Name: {
     type: String,
     required: true,
-    maxlength: 255,
-  },
-  seqNumber: {
-    type: Number,
-    required: true,
     unique: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  squence_Number: {
+    type: Number,
+    required: true,
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
-
-companyMasterSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
 });
 
 const CompanyMasterTable = mongoose.model(

@@ -4,6 +4,6 @@ const { holdings } = require("../../controllers");
 
 const holdingsRouter = express.Router();
 
-holdingsRouter.get("/holdings", holdings);
+holdingsRouter.get("/getAll", holdings);
 
 module.exports = holdingsRouter;

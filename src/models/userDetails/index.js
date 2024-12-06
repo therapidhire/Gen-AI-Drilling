@@ -43,7 +43,7 @@ const userDetailsSchema = new mongoose.Schema({
     type: String,
     enum: ["Super Admin", "Admin", "Supervisor", "User"],
     default: "User",
-    ref: "UserRoles",
+    // ref: "UserRoles",
   },
   //   createdBy: {
   //     type: mongoose.Schema.Types.ObjectId,

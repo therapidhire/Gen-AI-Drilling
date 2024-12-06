@@ -11,6 +11,7 @@ const {
   holdingsRouter,
   positionRouter,
   transactionRouter,
+  addStockRouter,
 } = require("./src/web/routes");
 
 app.use(cors());
@@ -21,10 +22,11 @@ app.get("/", (req, res) => {
   res.send("Hello World! vinit");
 });
 
-app.use("/user", LoginRouter);
-app.use("/share", holdingsRouter);
-app.use("/stock", positionRouter);
-app.use("/transaction", transactionRouter);
+app.use("/api/users", LoginRouter);
+app.use("/api", holdingsRouter);
+app.use("/api", positionRouter);
+app.use("/api/transaction", transactionRouter);
+app.use("/api", addStockRouter);
 
 const port = 8080;
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-const signToken = (role) => {
+const permission = (role) => {
   return async (req, res, next) => {
     try {
       const notesData = await Notes.findById(req?.payload?.userId);
@@ -18,4 +18,4 @@ const signToken = (role) => {
   };
 };
 
-module.exports = { signToken };
+module.exports = { permission };

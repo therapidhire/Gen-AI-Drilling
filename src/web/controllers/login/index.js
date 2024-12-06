@@ -4,16 +4,7 @@ const { signToken } = require("../../../middlewares/jwt");
 
 const login = async (req, res) => {
   try {
-    const {
-      email,
-      password,
-      // //   firstName,
-      // //   lastName,
-      // //   dob,
-      // //   age,
-      // //   phoneNo,
-      //   roles = "Admin",
-    } = req.body;
+    const { email, password } = req.body;
 
     // Basic Validation
     if (!email || !password) {

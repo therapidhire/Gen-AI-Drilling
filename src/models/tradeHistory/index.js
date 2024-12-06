@@ -6,14 +6,16 @@ const tradeHistorySchema = new mongoose.Schema({
     ref: "UserDetails",
     required: true,
   },
-  shares: [
-    {
-      symbol: { type: String, required: true },
-      quantity: { type: Number, required: true },
-      buyDate: { type: Date, required: true },
-      endDate: { type: Date },
-    },
-  ],
+  shares: {
+    // symbol: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    buyDate: { type: Date, required: true },
+    endDate: { type: Date },
+  },
+  transactionType: {
+    type: String,
+    required: true,
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserDetails",

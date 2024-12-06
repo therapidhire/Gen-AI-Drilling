@@ -13,12 +13,27 @@ const signToken = (payload, options = {}) => {
   }
 };
 
-const verifyToken = (token) => {
+const authMiddleware = async (req, res, next) => {
+  const token = req.headers["authorization"];
+  if (!token) return res.status(401).json({ error: "Access token missing" });
+
   try {
-    return jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select("-password");
+    if (!req.user) return res.status(401).json({ error: "Unauthorized user" });
+    next();
   } catch (error) {
-    throw new Error(`Error verifying token: ${error.message}`);
+    res.status(401).json({ error: "Invalid token" });
   }
 };
 
-module.exports = { signToken, verifyToken };
+const roleMiddleware = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ error: "Permission denied" });
+    }
+    next();
+  };
+};
+
+module.exports = { signToken, authMiddleware, roleMiddleware };
