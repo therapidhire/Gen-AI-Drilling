@@ -26,8 +26,10 @@ const addStock = async (req, res) => {
 
     return res.status(201).json({
       message: "Stock and stock details added successfully",
-      stock: savedStock,
-      stockDetails: savedStockDetails,
+      stock: {
+        savedStock: savedStock,
+        stockDetails: savedStockDetails,
+      },
     });
   } catch (err) {
     console.error("Error adding stock and price details:", err.message);

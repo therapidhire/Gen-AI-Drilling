@@ -13,7 +13,7 @@ const stockRouter = express.Router();
 stockRouter.get("/addStockDetails", addStockDetails);
 stockRouter.get("/getStock", getAllStockDetails);
 stockRouter.get("/getStockById", getStockDetailsByUserId);
-stockRouter.get("/updateStock", updateStockDetails);
-stockRouter.get("/deleteStock", deleteStockDetails);
+stockRouter.put("/updateStock", updateStockDetails);
+stockRouter.delete("/deleteStock", deleteStockDetails);
 
 module.exports = stockRouter;
