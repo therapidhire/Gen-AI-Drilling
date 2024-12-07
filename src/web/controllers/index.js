@@ -10,7 +10,8 @@ const {
 } = require("./transection");
 const {
   addStockDetails,
-  getStockDetails,
+  getAllStockDetails,
+  getStockDetailsByUserId,
   updateStockDetails,
   deleteStockDetails,
 } = require("./stock");
@@ -31,7 +32,8 @@ module.exports = {
   companyMasterData,
 
   addStockDetails,
-  getStockDetails,
+  getAllStockDetails,
+  getStockDetailsByUserId,
   updateStockDetails,
   deleteStockDetails,
 };

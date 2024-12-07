@@ -2,7 +2,8 @@ const express = require("express");
 
 const {
   addStockDetails,
-  getStockDetails,
+  getAllStockDetails,
+  getStockDetailsByUserId,
   updateStockDetails,
   deleteStockDetails,
 } = require("../../controllers");
@@ -10,7 +11,8 @@ const {
 const stockRouter = express.Router();
 
 stockRouter.get("/addStockDetails", addStockDetails);
-stockRouter.get("/getStock", getStockDetails);
+stockRouter.get("/getStock", getAllStockDetails);
+stockRouter.get("/getStockById", getStockDetailsByUserId);
 stockRouter.get("/updateStock", updateStockDetails);
 stockRouter.get("/deleteStock", deleteStockDetails);
 
