@@ -32,6 +32,17 @@ stockDetailTableSchema.pre("save", function (next) {
   next();
 });
 
+stockDetailTableSchema.set("toObject", { virtuals: true });
+stockDetailTableSchema.set("toJSON", { virtuals: true });
+
+// Virtual Reference to StockList
+stockDetailTableSchema.virtual("stockListData", {
+  ref: "StockList", // Model to reference
+  localField: "stock_Id", // Field in StockDetailTable
+  foreignField: "isin_Num", // Field in StockList
+  justOne: true, // Returns a single document instead of an array
+});
+
 const StockDetailTable = mongoose.model(
   "StockDetailTable",
   stockDetailTableSchema
