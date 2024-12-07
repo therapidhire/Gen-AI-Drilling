@@ -1,23 +1,20 @@
 const mongoose = require("mongoose");
 
 const stockDetailTableSchema = new mongoose.Schema({
-  Stock_id: {
-    type: Number,
+  stock_Id: {
+    type: String,
     required: true,
-    ref: "CompanyMasterTable",
   },
   price: {
     type: Number,
     required: true,
   },
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "UserDetails",
+    type: String,
     required: true,
   },
   updatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "UserDetails",
+    type: String,
     required: true,
   },
   createdAt: {

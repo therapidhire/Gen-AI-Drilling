@@ -1,13 +1,19 @@
 const { login, register } = require("./login");
 const holdings = require("./holdings");
 const position = require("./position");
-const { addStock } = require("./masterApi");
+const { addStock, companyMasterData } = require("./masterApi");
 const {
   getAllTransaction,
   getTransactionById,
   postBuy,
   postSale,
 } = require("./transection");
+const {
+  addStockDetails,
+  getStockDetails,
+  updateStockDetails,
+  deleteStockDetails,
+} = require("./stock");
 
 module.exports = {
   login,
@@ -22,4 +28,10 @@ module.exports = {
   postSale,
 
   addStock,
+  companyMasterData,
+
+  addStockDetails,
+  getStockDetails,
+  updateStockDetails,
+  deleteStockDetails,
 };

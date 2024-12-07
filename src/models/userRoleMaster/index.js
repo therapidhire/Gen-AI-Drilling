@@ -11,9 +11,9 @@ const userRoleMasterSchema = new mongoose.Schema({
     required: true,
     maxlength: 255,
   },
-  seqNumber: {
-    type: Number,
-    required: true,
+  user_id: {
+    type: String,
+    require: true,
     unique: true,
   },
 });

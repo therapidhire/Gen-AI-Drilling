@@ -12,6 +12,7 @@ const {
   positionRouter,
   transactionRouter,
   addStockRouter,
+  stockRouter,
 } = require("./src/web/routes");
 
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/api", holdingsRouter);
 app.use("/api", positionRouter);
 app.use("/api/transaction", transactionRouter);
 app.use("/api", addStockRouter);
+app.use("/api/stock", stockRouter);
 
 const port = 8080;
 app.listen(port, () => {

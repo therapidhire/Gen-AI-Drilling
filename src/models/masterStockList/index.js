@@ -1,19 +1,29 @@
 const mongoose = require("mongoose");
-const AutoIncrement = require("mongoose-sequence")(mongoose);
+// const AutoIncrement = require("mongoose-sequence")(mongoose);
 
-const StockListSchema = new mongoose.Schema({
-  StockName: {
+const stockListSchema = new mongoose.Schema({
+  stockName: {
     type: String,
     required: true,
     unique: true,
   },
-  SeqNum: {
-    type: Number,
+  symbol: {
+    type: String,
+    require: true,
     unique: true,
   },
+  isin_Num: {
+    type: String,
+    require: true,
+    unique: true,
+  },
+  // company_id: {
+  //   type: Number,
+  //   require: true,
+  // },
 });
 
-StockListSchema.plugin(AutoIncrement, { inc_field: "SeqNum" });
-const StockList = mongoose.model("StockList", StockListSchema);
+// StockListSchema.plugin(AutoIncrement, { inc_field: "SeqNum" });
+const StockList = mongoose.model("StockList", stockListSchema);
 
 module.exports = StockList;

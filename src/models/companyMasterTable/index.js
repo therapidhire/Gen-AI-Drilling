@@ -1,17 +1,18 @@
 const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const companyMasterSchema = new mongoose.Schema({
-  stock_Name: {
+  company_Name: {
     type: String,
     required: true,
     unique: true,
   },
-  squence_Number: {
+  seq_Number: {
     type: Number,
-    required: true,
   },
 });
 
+companyMasterSchema.plugin(AutoIncrement, { inc_field: "seq_Number" });
 const CompanyMasterTable = mongoose.model(
   "CompanyMasterTable",
   companyMasterSchema

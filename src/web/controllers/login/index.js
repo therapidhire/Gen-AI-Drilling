@@ -1,4 +1,5 @@
 const UserDetails = require("../../../models/userDetails");
+const UserRoleMaster = require("../../../models/userRoleMaster");
 const bcrypt = require("bcrypt");
 const { signToken } = require("../../../middlewares/jwt");
 
@@ -66,7 +67,7 @@ const register = async (req, res) => {
       email,
       phoneNo,
       password,
-      roles = "Admin",
+      roles = "Super Admin",
     } = req.body;
 
     // Basic Validation
@@ -97,6 +98,21 @@ const register = async (req, res) => {
       });
     }
 
+    const roleMapping = {
+      "Super Admin": { roleId: 1, roleDescription: "Super Admin" },
+      Admin: { roleId: 2, roleDescription: "Admin" },
+      Supervisor: { roleId: 3, roleDescription: "Supervisor" },
+      User: { roleId: 4, roleDescription: "User" },
+    };
+
+    const roleData = roleMapping[roles];
+    if (!roleData) {
+      return res.status(400).send({
+        status: 400,
+        message: `Invalid role provided: ${roles}. Valid roles are: Super Admin, Admin, Supervisor, User.`,
+      });
+    }
+
     // Create new user
     const newUser = new UserDetails({
       firstName,
@@ -109,11 +125,26 @@ const register = async (req, res) => {
       roles,
     });
 
-    await newUser.save();
+    const savedUser = await newUser.save();
+
+    const newRole = new UserRoleMaster({
+      roleId: roleData.roleId,
+      roleDescription: roleData.roleDescription,
+      user_id: savedUser._id,
+    });
+
+    await newRole.save();
 
     return res.status(201).send({
       status: 201,
       message: "User registered successfully.",
+      data: {
+        userId: savedUser._id,
+        firstName: savedUser.firstName,
+        lastName: savedUser.lastName,
+        email: savedUser.email,
+        roles: savedUser.roles,
+      },
     });
   } catch (error) {
     console.error("Error in register API:", error);
